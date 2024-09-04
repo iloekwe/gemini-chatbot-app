@@ -1,15 +1,13 @@
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
-# import genai
 import streamlit as st
 
 # Load the environment variables from the .env file
 load_dotenv()
 
 # Access the API key from the environment
-api_key = os.getenv['GEMINI_API_KEY']
-# api_key = os.environ['GEMINI_API_KEY']
+api_key = os.environ['GEMINI_API_KEY']
 
 # Validate the API key
 if not api_key:
@@ -114,7 +112,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Display image above the title and centralize it
-st.markdown('<div class="center-image"><img src="https://www.stockvault.net/data/2016/12/25/219513/preview16.jpg" width="300"></div>', unsafe_allow_html=True)
+st.markdown('<div class="center-image"><img src="https://www.stockvault.net/data/2016/12/25/219513/preview16.jpg" width="100"></div>', unsafe_allow_html=True)
 
 # Display title with animation
 st.markdown('<div class="main-title">World Travel Guide Chat: Journey with Gemini</div>', unsafe_allow_html=True)
@@ -145,11 +143,11 @@ if user_input:
     st.session_state.chat_history.append({"role": "assistant", "content": assistant_response})
 
     # Clear the input box after submission
-    st.experimental_rerun()
+    st.cache_data()
 
 # Button to reset chat history
 if st.button("Reset Chat", key="reset", help="Click to start a new journey"):
     st.session_state.chat_history = [
         {"role": "system", "content": "You are a helpful assistant."},
     ]
-    st.experimental_rerun()
+    st.cache_data()
